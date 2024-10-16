@@ -1,0 +1,65 @@
+Sample,ID,Type,Month,PMI,Pre_Post,Depth,Pig_Mandible,Weight,Run_order
+BLK_1,BLK_1,Blank,NA,,NA,NA,NA,NA,1
+PB_PM1,PB_PM1,sample,Month 0,0,Pre,Control,1,49.9,18
+PB_PM10,PB_PM10,sample,Month 0,0,Pre,Control,10,49.9,54
+PB_PM11,PB_PM11,sample,Month 0,0,Pre,Control,11,49.9,12
+PB_PM12,PB_PM12,sample,Month 0,0,Pre,Control,12,50.3,6
+PB_PM2,PB_PM2,sample,Month 0,0,Pre,Control,2,50.4,13
+PB_PM3,PB_PM3,sample,Month 0,0,Pre,Control,3,50,55
+PB_PM4,PB_PM4,sample,Month 0,0,Pre,Control,4,49.9,19
+PB_PM5,PB_PM5,sample,Month 0,0,Pre,Control,5,50.3,27
+PB_PM6,PB_PM6,sample,Month 0,0,Pre,Control,6,50.3,5
+PB_PM7,PB_PM7,sample,Month 0,0,Pre,Control,7,49.9,3
+PB_PM8,PB_PM8,sample,Month 0,0,Pre,Control,8,50.3,60
+PB_PM9,PB_PM9,sample,Month 0,0,Pre,Control,9,49.5,64
+PM1_D0,PM1_D0,sample,Month 1,1,Post,0,1,49.6,63
+PM1_D10,PM1_D10,sample,Month 1,1,Post,10,1,49.7,14
+PM1_D30,PM1_D30,sample,Month 1,1,Post,30,1,50.5,57
+PM1_D50,PM1_D50,sample,Month 1,1,Post,50,1,50.2,56
+PM10_D0,PM10_D0,sample,Month 5,5,Post,0,10,49.7,24
+PM10_D10,PM10_D10,sample,Month 5,5,Post,10,10,49.8,16
+PM10_D30,PM10_D30,sample,Month 5,5,Post,30,10,50.5,23
+PM10_D50,PM10_D50,sample,Month 5,5,Post,50,10,50.2,43
+PM11_D0,PM11_D0,sample,Month 6,6,Post,0,11,50.1,26
+PM11_D10,PM11_D10,sample,Month 6,6,Post,10,11,49.7,28
+PM11_D30,PM11_D30,sample,Month 6,6,Post,30,11,50.3,58
+PM11_D50,PM11_D50,sample,Month 6,6,Post,50,11,50,2
+PM12_D0,PM12_D0,sample,Month 6,6,Post,0,12,50.1,35
+PM12_D10,PM12_D10,sample,Month 6,6,Post,10,12,49.8,50
+PM2_D0,PM2_D0,sample,Month 1,1,Post,0,2,49.6,20
+PM2_D10,PM2_D10,sample,Month 1,1,Post,10,2,49.8,49
+PM2_D30,PM2_D30,sample,Month 1,1,Post,30,2,49.9,42
+PM2_D50,PM2_D50,sample,Month 1,1,Post,50,2,49.6,37
+PM3_D0,PM3_D0,sample,Month 2,2,Post,0,3,49.5,33
+PM3_D10,PM3_D10,sample,Month 2,2,Post,10,3,49.7,61
+PM3_D30,PM3_D30,sample,Month 2,2,Post,30,3,50.5,47
+PM3_D50,PM3_D50,sample,Month 2,2,Post,50,3,49.6,15
+PM4_D0,PM4_D0,sample,Month 2,2,Post,0,4,50,25
+PM4_D10,PM4_D10,sample,Month 2,2,Post,10,4,49.5,62
+PM4_D30,PM4_D30,sample,Month 2,2,Post,30,4,50.3,8
+PM4_D50,PM4_D50,sample,Month 2,2,Post,50,4,50.5,30
+PM5_D0,PM5_D0,sample,Month 3,3,Post,0,5,49.8,4
+PM5_D10,PM5_D10,sample,Month 3,3,Post,10,5,50.3,34
+PM5_D30,PM5_D30,sample,Month 3,3,Post,30,5,49.5,36
+PM5_D50,PM5_D50,sample,Month 3,3,Post,50,5,50.1,40
+PM6_D0,PM6_D0,sample,Month 3,3,Post,0,6,50.4,29
+PM6_D10,PM6_D10,sample,Month 3,3,Post,10,6,49.9,22
+PM6_D30,PM6_D30,sample,Month 3,3,Post,30,6,49.8,39
+PM6_D50,PM6_D50,sample,Month 3,3,Post,50,6,50.5,10
+PM7_D0,PM7_D0,sample,Month 4,4,Post,0,7,50.1,7
+PM7_D10,PM7_D10,sample,Month 4,4,Post,10,7,50.5,45
+PM7_D30,PM7_D30,sample,Month 4,4,Post,30,7,50.4,59
+PM7_D50,PM7_D50,sample,Month 4,4,Post,50,7,50.4,17
+PM8_D0,PM8_D0,sample,Month 4,4,Post,0,8,50.5,53
+PM8_D10,PM8_D10,sample,Month 4,4,Post,10,8,50.4,44
+PM8_D30,PM8_D30,sample,Month 4,4,Post,30,8,49.8,38
+PM8_D50,PM8_D50,sample,Month 4,4,Post,50,8,49.6,9
+PM9_D0,PM9_D0,sample,Month 5,5,Post,0,9,50.4,46
+PM9_D10,PM9_D10,sample,Month 5,5,Post,10,9,49.9,48
+PM9_D30,PM9_D30,sample,Month 5,5,Post,30,9,49.5,52
+PM9_D50,PM9_D50,sample,Month 5,5,Post,50,9,50.5,32
+QC1,QC1,QC,NA,,NA,NA,NA,NA,11
+QC2,QC2,QC,NA,,NA,NA,NA,NA,21
+QC3,QC3,QC,NA,,NA,NA,NA,NA,31
+QC4,QC4,QC,NA,,NA,NA,NA,NA,41
+QC5,QC5,QC,NA,,NA,NA,NA,NA,51
