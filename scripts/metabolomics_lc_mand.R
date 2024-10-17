@@ -22,11 +22,10 @@ suppressPackageStartupMessages({
   library(janitor)
 })
 
-## ---------------------------------------------------------------
-# prepare data
-data <- read.csv("data.csv", row.names = 1, check.names = TRUE)
-sample_meta <- read.csv("sample_meta.csv", row.names = 1, check.names = TRUE)
-var_meta <- read.csv("var_meta.csv", row.names = 1, check.names = TRUE)
+# import data -------------------------------------------------------------
+data <- read.csv("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/data.csv", row.names = 1, check.names = TRUE)
+sample_meta <- read.csv("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/sample_meta.csv", row.names = 1, check.names = TRUE)
+var_meta <- read.csv("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/var_meta.csv", row.names = 1, check.names = TRUE)
 var_meta <- clean_names(var_meta)
 
 data[data == 0] <- NA
@@ -177,27 +176,27 @@ df_melted %>%
   group_by(variable) %>%
   kruskal_test(value ~ PMI) %>%
   add_significance() %>%
-  write.xlsx("kruskal_test_PMI_lc.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_PMI_lc.xlsx")
 
 df_melted %>%
   group_by(variable) %>%
   dunn_test(value ~ PMI,
             p.adjust.method = "fdr") %>%
   add_significance() %>%
-  write.xlsx("dunn_test_PMI_lc.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/dunn_test_PMI_lc.xlsx")
 
 df_melted %>%
   group_by(variable) %>%
   kruskal_test(value ~ Depth) %>%
   add_significance() %>%
-  write.xlsx("kruskal_test_Depth_lc.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_Depth_lc.xlsx")
 
 df_melted %>%
   group_by(variable) %>%
   dunn_test(value ~ Depth,
             p.adjust.method = "fdr") %>%
   add_significance() %>%
-  write.xlsx("dunn_test_Depth_lc.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/dunn_test_Depth_lc.xlsx")
 
 ## ---------------------------------------------------------------
 # heatmap
@@ -223,7 +222,7 @@ heat_lc <- pheatmap::pheatmap(
   angle_col =  "45"
 ) 
 
-ggsave('heat_lc.pdf', width = 22.5, height = 16, plot = heat_lc)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/heat_lc.pdf', width = 22.5, height = 16, plot = heat_lc)
 
 ## ---------------------------------------------------------------
 # Machine learning - prepare data
@@ -295,7 +294,7 @@ var_meta[r,] -> vip_bone_mandible_lcms_plsr_var_meta
 vip_bone_mandible_lcms_plsr_var_meta$Importance <- pls_vip$Importance
 
 # save VIP
-write.xlsx(vip_bone_mandible_lcms_plsr_var_meta,"vip_bone_mandible_lcms_plsr_var_meta.xlsx")
+write.xlsx(vip_bone_mandible_lcms_plsr_var_meta,"/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/vip_bone_mandible_lcms_plsr_var_meta.xlsx")
 
 
 # box plots ---------------------------------------------------------------
@@ -310,7 +309,7 @@ df %>%
   viridis::scale_fill_viridis(option = "D", discrete = TRUE, alpha = 0.4)+
   xlab('PMI (month)') + ylab('Normalised intensity') + theme(legend.position = 'none')
 
-ggsave('boxplot_lc.pdf', width = 7, height = 3)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/boxplot_lc.pdf', width = 7, height = 3)
 
 # combine plots -----------------------------------------------------------
 (pca_gc | pca_lc) + 
@@ -321,5 +320,5 @@ ggsave('pca_tot.pdf', width = 10, height = 4)
 (plsr_gc | plsr_lc) + 
   plot_annotation(tag_levels = 'A')
 
-ggsave('plsr_tot.pdf', width = 10, height = 4)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/plsr_tot.pdf', width = 10, height = 4)
 

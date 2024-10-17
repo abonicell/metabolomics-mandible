@@ -19,18 +19,18 @@ suppressPackageStartupMessages({
   library(RColorBrewer)
 })
 
-
 # load files --------------------------------------------------------------
-load("mandible_al.rda")
-load("mandible_dec.rda")
-load("mandible_exp.rda")
-load("mandible_id.rda")
-load("golmdatabase.rda")
+# object created to reduce run time 
+load("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/mandible_al.rda")
+load("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/mandible_dec.rda")
+load("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/mandible_exp.rda")
+load("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/mandible_id.rda")
+load("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/golmdatabase.rda")
 
 plan(future::multisession, workers = 7)
 
-instrumental <- read.csv('inst.csv')
-phenotype <- read.csv('pheno.csv')
+instrumental <- read.csv('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/inst.csv')
+phenotype <- read.csv('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/pheno.csv')
 
 # # create object
 # ex <- newExp(instrumental = instrumental,
@@ -73,22 +73,17 @@ data.list <- dataList(ex_id)
 # plot identified features
 plotSpectra(ex_id, 53, draw.color = "red") 
 
-# export for nist comparison
-# export2CEF(ex_id, id.database = mslib, store.path = getwd())
-# export2MSP(ex_id, id.database = mslib, store.path = getwd())
-
-## ---------------------------------------------------------------
-# prepare identification matrix
+# prepare identification matrix -------------------------------------------
 id.list$AlignID <- sub("^", "ft", id.list$AlignID )
 
 # prepare intensity matrix
 align.list.proc <- align.list[,-2:-4]
 align.list.proc$AlignID <- sub("^", "ft", align.list.proc$AlignID )
 align.list.proc[align.list.proc == 0] <- NA
-align.list.proc <- align.list.proc %>% remove_rownames %>% column_to_rownames(var="AlignID")
+align.list.proc <- align.list.proc %>% remove_rownames %>% 
+  column_to_rownames(var="AlignID")
 
-## ---------------------------------------------------------------
-# create DatasetExperiment
+# create DatasetExperiment ------------------------------------------------
 gc_DE <- DatasetExperiment(
   data = as.data.frame(t(align.list.proc)),
   sample_meta = phenotype,
@@ -98,7 +93,6 @@ gc_DE <- DatasetExperiment(
   name = "GC-MS"
 )
 
-# drift correction
 # convert to factors
 gc_DE$sample_meta$class = factor(gc_DE$sample_meta$class)
 gc_DE$sample_meta$type = factor(gc_DE$sample_meta$type)
@@ -106,8 +100,7 @@ gc_DE$sample_meta$depth = factor(gc_DE$sample_meta$depth)
 gc_DE$sample_meta$run_order = as.numeric(gc_DE$sample_meta$run_order)
 gc_DE
 
-## ---------------------------------------------------------------
-# matrix processing
+# matrix processing -------------------------------------------------------
 # blank filter
 blk_filter <- blank_filter(
   fold_change = 25,
@@ -127,7 +120,6 @@ gc_blk
 nc = ncol(gc_DE) - ncol(gc_blk)
 cat(paste0('Number of features removed: ', nc))
 
-## ---------------------------------------------------------------
 # missing feature and % value - remove eveery feature with more than 10% missing 
 # data
 perc_features <-
@@ -146,7 +138,6 @@ gc_blk_perc
 nc = ncol(gc_blk) - ncol(gc_blk_perc)
 cat(paste0('Number of features removed: ', nc))
 
-## ---------------------------------------------------------------
 # removing samples based on missingness
 perc_sample <-
   mv_sample_filter(mv_threshold = 50)
@@ -162,8 +153,7 @@ gc_blk_perc_samp
 nc = ncol(gc_blk) - ncol(gc_blk_perc_samp)
 cat(paste0('Number of samples removed: ', nc))
 
-## ---------------------------------------------------------------
-# rsd QC by feature - it is very strict, can be lifted to rsd_threshold = 20/25
+# rsd QC by feature 
 qc_features <-
   rsd_filter(rsd_threshold = 30,
              qc_label = 'QC',
@@ -180,8 +170,7 @@ gc_blk_perc_qc
 nc = ncol(gc_blk_perc) - ncol(gc_blk_perc_qc)
 cat(paste0('Number of features removed: ', nc))
 
-## ---------------------------------------------------------------
-# perform drift correction 
+# perform drift correction  -----------------------------------------------
 M = # batch correction
   sb_corr(
     order_col='run_order',
@@ -204,7 +193,7 @@ B = chart_plot(C,predicted(M)) + theme_bw(14) + ggtitle('Adjusted')
 
 M = predicted(M)
 
-## ---------------------------------------------------------------
+# data normalisation and imputation ---------------------------------------
 # prepare the model sequence
 process <- knn_impute(neighbours = 5, sample_max = 50) +
   pqn_norm(qc_label = 'QC', factor_name = 'type') +
@@ -220,15 +209,14 @@ nrow(gc_pr$variable_meta)
 
 box_sample <- DatasetExperiment_boxplot(
   factor_name = 'type',
-  number = 5,
+  number = 20,
   by_sample = TRUE,
   per_class = TRUE
 )
 
 chart_plot(box_sample, gc_pr) + theme_bw(14)
 
-## ---------------------------------------------------------------
-# PCA - check data quality
+# PCA - check data quality ------------------------------------------------
 PCA <- autoscale() + PCA(number_components = 3)
 gc_pr_PCA <- model_apply(PCA, gc_pr)
 
@@ -242,7 +230,7 @@ score <- pca_scores_plot(
 chart_plot(score, gc_pr_PCA[2]) + 
   theme_bw(16)
 
-## ---------------------------------------------------------------
+# subset object -----------------------------------------------------------
 # Subset to only keep sample and remove QC for further processing and
 # we remove those few outliers shown in the score plot above
 TT = filter_smeta(mode = 'include',
@@ -255,15 +243,11 @@ TT = model_apply(TT, gc_pr)
 gc_pr_filtered = predicted(TT)
 gc_pr_filtered
 
-# # save variable metadata for kegg annotation 
-# variable_meta_path <- gc_pr_filtered$variable_meta
-# write.csv(variable_meta_path, "variable_meta_path.csv")
-
 gc_pr_filtered$sample_meta$depth = factor(gc_pr_filtered$sample_meta$depth)
 
-## ---------------------------------------------------------------
-# remove duplicated features with lower match score
-M = filter_by_name(mode='exclude',dimension='variable',names=c("ft160","ft622","ft254"))
+# remove duplicated features with lower match score -----------------------
+M = filter_by_name(mode='exclude',dimension='variable',
+                   names=c("ft160","ft622","ft254"))
 
 # apply model
 gc_pr_filtered = model_apply(M, gc_pr_filtered)
@@ -287,8 +271,7 @@ pca_gc <- chart_plot(score, gc_pr_filtered_PCA[2]) +
                                               discrete = TRUE,
                                               name = "PMI") 
 
-## ---------------------------------------------------------------
-# Univariate statistics (using rstatix package)
+# Univariate statistics (using rstatix package) ---------------------------
 df <- gc_pr_filtered$data
 meta <- gc_pr_filtered$sample_meta
 
@@ -301,7 +284,7 @@ df_melted %>%
   group_by(variable) %>%
   kruskal_test(value ~ PMI) %>%
   add_significance() %>%
-  write.xlsx("kruskal_test_PMI.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_PMI.xlsx")
 
 df_melted %>%
   group_by(variable) %>%
@@ -314,17 +297,16 @@ df_melted %>%
   group_by(variable) %>%
   kruskal_test(value ~ Depth) %>%
   add_significance() %>%
-  write.xlsx("kruskal_test_Depth.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_Depth.xlsx")
 
 df_melted %>%
   group_by(variable) %>%
   dunn_test(value ~ Depth,
             p.adjust.method = "fdr") %>%
   add_significance() %>%
-  write.xlsx("dunn_test_Depth.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/dunn_test_Depth.xlsx")
 
-## ---------------------------------------------------------------
-# heatmap
+# heatmap -----------------------------------------------------------------
 df <- gc_pr_filtered$data
 df$month <- gc_pr_filtered$sample_meta$month
 df$depth <- gc_pr_filtered$sample_meta$depth
@@ -347,10 +329,9 @@ heat_gc = pheatmap::pheatmap(
   angle_col =  "45"
 ) 
 
-ggsave('heat_gc.pdf', width = 12, height = 8, plot= heat_gc)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/heat_gc.pdf', width = 12, height = 8, plot= heat_gc)
 
-## ---------------------------------------------------------------
-# Machine learning - prepare data
+# data split --------------------------------------------------------------
 df <- gc_pr_filtered$data
 df$PMI <- as.numeric(gc_pr_filtered$sample_meta$pmi)
 
@@ -362,8 +343,7 @@ set.seed(123)
 train <- training(split)
 test <- testing(split)
 
-## ---------------------------------------------------------------
-# PLS model
+# PLS regression model ----------------------------------------------------
 set.seed(123)
 #train model
 pls_model <- train(
@@ -383,6 +363,7 @@ pls_model_predictions_test <- pls_model %>% predict(test)
 Metrics::rmse(test$PMI, pls_model_predictions_test)
 Metrics::mae(test$PMI, pls_model_predictions_test)
 
+# plot predicted vs actual values
 data_gr_pls <- train %>%
   mutate(set = "train") %>%
   bind_rows(test %>% mutate(set = "test"))
@@ -410,6 +391,14 @@ plsr_gc <- ggplot(data = data_gr_pls, mapping = aes(y = fit, x = PMI)) +
 
 plsr_gc
 
+vip::vip(
+  pls_model,
+  num_features = 10,
+  geom = "point",
+  aesthetics = list(color = "#F4685CFF", size = 3)
+) +
+  theme_bw(14)
+
 # normalised variable importance
 pls_vip <- vip::vi(pls_model) 
 var_meta <- gc_pr_filtered$variable_meta
@@ -421,11 +410,12 @@ var_meta[r,] -> vip_bone_mandible_gcms_plsr_var_meta
 vip_bone_mandible_gcms_plsr_var_meta$Importance <- pls_vip$Importance
 
 # save VIP
-write.xlsx(vip_bone_mandible_gcms_plsr_var_meta,"vip_bone_mandible_gcms_plsr_var_meta.xlsx")
+write.xlsx(vip_bone_mandible_gcms_plsr_var_meta,
+           "/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/vip_bone_mandible_gcms_plsr_var_meta.xlsx")
 
 # box plots ---------------------------------------------------------------
 df %>%
-  dplyr::select(PMI,ft403, ft625 ) %>%
+  dplyr::select(PMI, ft159, ft403, ft624, ft625 ) %>%
   gather(Measure, Value,-PMI) %>%
   ggplot(aes(x=factor(PMI), y=Value,color=factor(PMI), fill=factor(PMI))) + 
   geom_boxplot(width=0.4,lwd=.7)   +facet_wrap(~Measure, scales = "free_y")+ 
@@ -435,5 +425,5 @@ df %>%
   viridis::scale_fill_viridis(option = "A", discrete = TRUE, alpha = 0.4)+
   xlab('PMI (month)') + ylab('Normalised intensity') +theme(legend.position = 'none')
 
-ggsave('boxplot_gc.pdf', width = 7, height = 3)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/boxplot_gc.pdf', width = 7, height = 3)
 
