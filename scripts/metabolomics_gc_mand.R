@@ -335,15 +335,6 @@ annotation_col = data.frame(df[,49:50])
 colnames(annotation_col) <- c("PMI","Depth (cm)")
 row.names(annotation_col) <- colnames(hm_t)
 
-# library(colouR)
-# 
-# getTopCol(path = "https://bookdown.org/hneth/ds4psy/ds4psy_files/figure-html/apx-color-blind-palette-show-1.png",
-#           n = 10,
-#           avgCols = FALSE,
-#           exclude = FALSE)
-
-
-
 heat_gc = pheatmap::pheatmap(
   hm_t,
   annotation_col = annotation_col,
