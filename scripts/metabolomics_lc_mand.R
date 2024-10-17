@@ -315,7 +315,7 @@ ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/bo
 (pca_gc | pca_lc) + 
   plot_annotation(tag_levels = 'A')
 
-ggsave('pca_tot.pdf', width = 10, height = 4)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/pca_tot.pdf', width = 10, height = 4)
 
 (plsr_gc | plsr_lc) + 
   plot_annotation(tag_levels = 'A')
