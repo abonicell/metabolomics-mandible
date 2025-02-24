@@ -357,6 +357,38 @@ pls_model <- train(
 
 pls_model
 
+# Define the residual plot function
+residual_plot <- function(model, data, response) {
+  
+  # Check if model is trained with caret
+  if (!inherits(model, "train")) {
+    stop("The model should be a 'train' object from the caret package.")
+  }
+  
+  # Predict values
+  predicted_values <- predict(model, data)
+  
+  # Extract actual values
+  actual_values <- data[[response]]
+  
+  # Compute residuals
+  residuals <- actual_values - predicted_values
+  
+  # Create a data frame for plotting
+  residual_data <- data.frame(Predicted = predicted_values, Residuals = residuals)
+  
+  # Plot residuals
+  ggplot(residual_data, aes(x = Predicted, y = Residuals)) +
+    geom_point(alpha = 0.5, color = "blue") + 
+    geom_hline(yintercept = 0, linetype = "dashed", color = "red") + 
+    labs(title = "Residual Plot",
+         x = "Predicted Values",
+         y = "Residuals") + theme_bw(12)
+}
+
+# Generate the residual plot
+resid_gc <- residual_plot(pls_model, test, "PMI") + ggtitle('GC-MS model')
+
 # Make predictions
 pls_model_predictions_test <- pls_model %>% predict(test)
 # error in test set
