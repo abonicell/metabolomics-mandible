@@ -120,6 +120,8 @@ lc_pr <- model_apply(process, lc_blk_perc_qc)
 # get the transformed, scaled and imputed matrix
 lc_pr <- predicted(lc_pr)
 
+lc_pr$data %>% write_delim("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/process_matrix.txt")
+
 ## ---------------------------------------------------------------
 # PCA
 PCA <- mean_centre() + PCA(number_components = 3)

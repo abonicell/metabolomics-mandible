@@ -100,6 +100,8 @@ gc_DE$sample_meta$depth = factor(gc_DE$sample_meta$depth)
 gc_DE$sample_meta$run_order = as.numeric(gc_DE$sample_meta$run_order)
 gc_DE
 
+gc_DE$data %>% write.csv("~/Documents/GitHub/metabolomics-mandible/data/data_gc.csv")
+
 # matrix processing -------------------------------------------------------
 # blank filter
 blk_filter <- blank_filter(
