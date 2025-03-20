@@ -172,6 +172,7 @@ gc_blk_perc_qc
 nc = ncol(gc_blk_perc) - ncol(gc_blk_perc_qc)
 cat(paste0('Number of features removed: ', nc))
 
+
 # perform drift correction  -----------------------------------------------
 M = # batch correction
   sb_corr(
@@ -194,6 +195,8 @@ B = chart_plot(C,predicted(M)) + theme_bw(14) + ggtitle('Adjusted')
   theme(legend.position = 'bottom')
 
 M = predicted(M)
+
+
 
 # data normalisation and imputation ---------------------------------------
 # prepare the model sequence

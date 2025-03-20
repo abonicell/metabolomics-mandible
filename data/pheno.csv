@@ -1,66 +1,66 @@
-﻿sampleID,subjectID,runID,class,type,run_order,pmi,month,depth,mandible,weight,Batch,batch_qc
-BLK_1,BLK_1,BLK_1.mzML,,Blank,1,,,,,,1,1
-PB_PM1,PB_PM1,PB_PM1.mzML,Pre,sample,26,0,Month 0,control,1,49.9,1,26
-PB_PM10,PB_PM10,PB_PM10.mzML,Pre,sample,32,0,Month 0,control,10,49.9,1,32
-PB_PM11,PB_PM11,PB_PM11.mzML,Pre,sample,30,0,Month 0,control,11,49.9,1,30
-PB_PM12,PB_PM12,PB_PM12.mzML,Pre,sample,33,0,Month 0,control,12,50.3,1,33
-PB_PM2,PB_PM2,PB_PM2.mzML,Pre,sample,35,0,Month 0,control,2,50.4,1,35
-PB_PM3,PB_PM3,PB_PM3.mzML,Pre,sample,51,0,Month 0,control,3,50,1,51
-PB_PM4,PB_PM4,PB_PM4.mzML,Pre,sample,66,0,Month 0,control,4,49.9,1,66
-PB_PM5,PB_PM5,PB_PM5.mzML,Pre,sample,21,0,Month 0,control,5,50.3,1,21
-PB_PM6,PB_PM6,PB_PM6.mzML,Pre,sample,64,0,Month 0,control,6,50.3,1,64
-PB_PM7,PB_PM7,PB_PM7.mzML,Pre,sample,18,0,Month 0,control,7,49.9,1,18
-PB_PM8,PB_PM8,PB_PM8.mzML,Pre,sample,54,0,Month 0,control,8,50.3,1,54
-PB_PM9,PB_PM9,PB_PM9.mzML,Post,sample,53,0,Month 0,control,9,49.5,1,53
-PM1_D0,PM1_D0,PM1_D0.mzML,Post,sample,55,1,Month 1,0,1,49.6,1,55
-PM1_D10,PM1_D10,PM1_D10.mzML,Post,sample,9,1,Month 1,10,1,49.7,1,9
-PM1_D30,PM1_D30,PM1_D30.mzML,Post,sample,42,1,Month 1,30,1,50.5,1,42
-PM1_D50,PM1_D50,PM1_D50.mzML,Post,sample,60,1,Month 1,50,1,50.2,1,60
-PM10_D0,PM10_D0,PM10_D0.mzML,Post,sample,39,5,Month 5,0,10,49.7,1,39
-PM10_D10,PM10_D10,PM10_D10.mzML,Post,sample,6,5,Month 5,10,10,49.8,1,6
-PM10_D30,PM10_D30,PM10_D30.mzML,Post,sample,22,5,Month 5,30,10,50.5,1,22
-PM10_D50,PM10_D50,PM10_D50.mzML,Post,sample,16,5,Month 5,50,10,50.2,1,16
-PM11_D0,PM11_D0,PM11_D0.mzML,Post,sample,37,6,Month 6,0,11,50.1,1,37
-PM11_D10,PM11_D10,PM11_D10.mzML,Post,sample,63,6,Month 6,10,11,49.7,1,63
-PM11_D30,PM11_D30,PM11_D30.mzML,Post,sample,24,6,Month 6,30,11,50.3,1,24
-PM11_D50,PM11_D50,PM11_D50.mzML,Post,sample,59,6,Month 6,50,11,50,1,59
-PM12_D0,PM12_D0,PM12_D0.mzML,Post,sample,57,6,Month 6,0,12,50.1,1,57
-PM12_D10,PM12_D10,PM12_D10.mzML,Post,sample,27,6,Month 6,10,12,49.8,1,27
-PM2_D0,PM2_D0,PM2_D0.mzML,Post,sample,25,1,Month 1,0,2,49.6,1,25
-PM2_D10,PM2_D10,PM2_D10.mzML,Post,sample,7,1,Month 1,10,2,49.8,1,7
-PM2_D30,PM2_D30,PM2_D30.mzML,Post,sample,67,1,Month 1,30,2,49.9,1,67
-PM2_D50,PM2_D50,PM2_D50.mzML,Post,sample,43,1,Month 1,50,2,49.6,1,43
-PM3_D0,PM3_D0,PM3_D0.mzML,Post,sample,46,2,Month 2,0,3,49.5,1,46
-PM3_D10,PM3_D10,PM3_D10.mzML,Post,sample,61,2,Month 2,10,3,49.7,1,61
-PM3_D30,PM3_D30,PM3_D30.mzML,Post,sample,62,2,Month 2,30,3,50.5,1,62
-PM3_D50,PM3_D50,PM3_D50.mzML,Post,sample,34,2,Month 2,50,3,49.6,1,34
-PM4_D0,PM4_D0,PM4_D0.mzML,Post,sample,13,2,Month 2,0,4,50,1,13
-PM4_D10,PM4_D10,PM4_D10.mzML,Post,sample,28,2,Month 2,10,4,49.5,1,28
-PM4_D30,PM4_D30,PM4_D30.mzML,Post,sample,40,2,Month 2,30,4,50.3,1,40
-PM4_D50,PM4_D50,PM4_D50.mzML,Post,sample,49,2,Month 2,50,4,50.5,1,49
-PM5_D0,PM5_D0,PM5_D0.mzML,Post,sample,41,3,Month 3,0,5,49.8,1,41
-PM5_D10,PM5_D10,PM5_D10.mzML,Post,sample,15,3,Month 3,10,5,50.3,1,15
-PM5_D30,PM5_D30,PM5_D30.mzML,Post,sample,58,3,Month 3,30,5,49.5,1,58
-PM5_D50,PM5_D50,PM5_D50.mzML,Post,sample,12,3,Month 3,50,5,50.1,1,12
-PM6_D0,PM6_D0,PM6_D0.mzML,Post,sample,44,3,Month 3,0,6,50.4,1,44
-PM6_D10,PM6_D10,PM6_D10.mzML,Post,sample,50,3,Month 3,10,6,49.9,1,50
-PM6_D30,PM6_D30,PM6_D30.mzML,Post,sample,3,3,Month 3,30,6,49.8,1,3
-PM6_D50,PM6_D50,PM6_D50.mzML,Post,sample,36,3,Month 3,50,6,50.5,1,36
-PM7_D0,PM7_D0,PM7_D0.mzML,Post,sample,19,4,Month 4,0,7,50.1,1,19
-PM7_D10,PM7_D10,PM7_D10.mzML,Post,sample,5,4,Month 4,10,7,50.5,1,5
-PM7_D30,PM7_D30,PM7_D30.mzML,Post,sample,52,4,Month 4,30,7,50.4,1,52
-PM7_D50,PM7_D50,PM7_D50.mzML,Post,sample,8,4,Month 4,50,7,50.4,1,8
-PM8_D0,PM8_D0,PM8_D0.mzML,Post,sample,17,4,Month 4,0,8,50.5,1,17
-PM8_D10,PM8_D10,PM8_D10.mzML,Post,sample,31,4,Month 4,10,8,50.4,1,31
-PM8_D30,PM8_D30,PM8_D30.mzML,Post,sample,45,4,Month 4,30,8,49.8,1,45
-PM8_D50,PM8_D50,PM8_D50.mzML,Post,sample,23,4,Month 4,50,8,49.6,1,23
-PM9_D0,PM9_D0,PM9_D0.mzML,Post,sample,48,5,Month 5,0,9,50.4,1,48
-PM9_D10,PM9_D10,PM9_D10.mzML,Post,sample,14,5,Month 5,10,9,49.9,1,14
-PM9_D30,PM9_D30,PM9_D30.mzML,Post,sample,4,5,Month 5,30,9,49.5,1,4
-PM9_D50,PM9_D50,PM9_D50.mzML,Post,sample,10,5,Month 5,50,9,50.5,1,10
-QC2,QC2,QC2.mzML,QC,QC,11,,,,,,1,11
-QC3,QC3,QC3.mzML,QC,QC,20,,,,,,1,20
-QC4,QC4,QC4.mzML,QC,QC,29,,,,,,1,29
-QC5,QC5,QC5.mzML,QC,QC,38,,,,,,1,38
-QC6,QC6,QC6.mzML,QC,QC,47,,,,,,1,47
-QC7,QC7,QC7.mzML,QC,QC,56,,,,,,1,56
+﻿sampleID,subjectID,runID,class,sample source,type,run_order,pmi,month,depth,mandible,weight,Batch,batch_qc
+BLK_1,BLK_1,BLK_1.mzML,,madible cortical bone,Blank,1,,,,,,1,1
+PB_PM1,PB_PM1,PB_PM1.mzML,Pre,madible cortical bone,sample,26,0,Month 0,control,1,49.9,1,26
+PB_PM10,PB_PM10,PB_PM10.mzML,Pre,madible cortical bone,sample,32,0,Month 0,control,10,49.9,1,32
+PB_PM11,PB_PM11,PB_PM11.mzML,Pre,madible cortical bone,sample,30,0,Month 0,control,11,49.9,1,30
+PB_PM12,PB_PM12,PB_PM12.mzML,Pre,madible cortical bone,sample,33,0,Month 0,control,12,50.3,1,33
+PB_PM2,PB_PM2,PB_PM2.mzML,Pre,madible cortical bone,sample,35,0,Month 0,control,2,50.4,1,35
+PB_PM3,PB_PM3,PB_PM3.mzML,Pre,madible cortical bone,sample,51,0,Month 0,control,3,50,1,51
+PB_PM4,PB_PM4,PB_PM4.mzML,Pre,madible cortical bone,sample,66,0,Month 0,control,4,49.9,1,66
+PB_PM5,PB_PM5,PB_PM5.mzML,Pre,madible cortical bone,sample,21,0,Month 0,control,5,50.3,1,21
+PB_PM6,PB_PM6,PB_PM6.mzML,Pre,madible cortical bone,sample,64,0,Month 0,control,6,50.3,1,64
+PB_PM7,PB_PM7,PB_PM7.mzML,Pre,madible cortical bone,sample,18,0,Month 0,control,7,49.9,1,18
+PB_PM8,PB_PM8,PB_PM8.mzML,Pre,madible cortical bone,sample,54,0,Month 0,control,8,50.3,1,54
+PB_PM9,PB_PM9,PB_PM9.mzML,Post,madible cortical bone,sample,53,0,Month 0,control,9,49.5,1,53
+PM1_D0,PM1_D0,PM1_D0.mzML,Post,madible cortical bone,sample,55,1,Month 1,0,1,49.6,1,55
+PM1_D10,PM1_D10,PM1_D10.mzML,Post,madible cortical bone,sample,9,1,Month 1,10,1,49.7,1,9
+PM1_D30,PM1_D30,PM1_D30.mzML,Post,madible cortical bone,sample,42,1,Month 1,30,1,50.5,1,42
+PM1_D50,PM1_D50,PM1_D50.mzML,Post,madible cortical bone,sample,60,1,Month 1,50,1,50.2,1,60
+PM10_D0,PM10_D0,PM10_D0.mzML,Post,madible cortical bone,sample,39,5,Month 5,0,10,49.7,1,39
+PM10_D10,PM10_D10,PM10_D10.mzML,Post,madible cortical bone,sample,6,5,Month 5,10,10,49.8,1,6
+PM10_D30,PM10_D30,PM10_D30.mzML,Post,madible cortical bone,sample,22,5,Month 5,30,10,50.5,1,22
+PM10_D50,PM10_D50,PM10_D50.mzML,Post,madible cortical bone,sample,16,5,Month 5,50,10,50.2,1,16
+PM11_D0,PM11_D0,PM11_D0.mzML,Post,madible cortical bone,sample,37,6,Month 6,0,11,50.1,1,37
+PM11_D10,PM11_D10,PM11_D10.mzML,Post,madible cortical bone,sample,63,6,Month 6,10,11,49.7,1,63
+PM11_D30,PM11_D30,PM11_D30.mzML,Post,madible cortical bone,sample,24,6,Month 6,30,11,50.3,1,24
+PM11_D50,PM11_D50,PM11_D50.mzML,Post,madible cortical bone,sample,59,6,Month 6,50,11,50,1,59
+PM12_D0,PM12_D0,PM12_D0.mzML,Post,madible cortical bone,sample,57,6,Month 6,0,12,50.1,1,57
+PM12_D10,PM12_D10,PM12_D10.mzML,Post,madible cortical bone,sample,27,6,Month 6,10,12,49.8,1,27
+PM2_D0,PM2_D0,PM2_D0.mzML,Post,madible cortical bone,sample,25,1,Month 1,0,2,49.6,1,25
+PM2_D10,PM2_D10,PM2_D10.mzML,Post,madible cortical bone,sample,7,1,Month 1,10,2,49.8,1,7
+PM2_D30,PM2_D30,PM2_D30.mzML,Post,madible cortical bone,sample,67,1,Month 1,30,2,49.9,1,67
+PM2_D50,PM2_D50,PM2_D50.mzML,Post,madible cortical bone,sample,43,1,Month 1,50,2,49.6,1,43
+PM3_D0,PM3_D0,PM3_D0.mzML,Post,madible cortical bone,sample,46,2,Month 2,0,3,49.5,1,46
+PM3_D10,PM3_D10,PM3_D10.mzML,Post,madible cortical bone,sample,61,2,Month 2,10,3,49.7,1,61
+PM3_D30,PM3_D30,PM3_D30.mzML,Post,madible cortical bone,sample,62,2,Month 2,30,3,50.5,1,62
+PM3_D50,PM3_D50,PM3_D50.mzML,Post,madible cortical bone,sample,34,2,Month 2,50,3,49.6,1,34
+PM4_D0,PM4_D0,PM4_D0.mzML,Post,madible cortical bone,sample,13,2,Month 2,0,4,50,1,13
+PM4_D10,PM4_D10,PM4_D10.mzML,Post,madible cortical bone,sample,28,2,Month 2,10,4,49.5,1,28
+PM4_D30,PM4_D30,PM4_D30.mzML,Post,madible cortical bone,sample,40,2,Month 2,30,4,50.3,1,40
+PM4_D50,PM4_D50,PM4_D50.mzML,Post,madible cortical bone,sample,49,2,Month 2,50,4,50.5,1,49
+PM5_D0,PM5_D0,PM5_D0.mzML,Post,madible cortical bone,sample,41,3,Month 3,0,5,49.8,1,41
+PM5_D10,PM5_D10,PM5_D10.mzML,Post,madible cortical bone,sample,15,3,Month 3,10,5,50.3,1,15
+PM5_D30,PM5_D30,PM5_D30.mzML,Post,madible cortical bone,sample,58,3,Month 3,30,5,49.5,1,58
+PM5_D50,PM5_D50,PM5_D50.mzML,Post,madible cortical bone,sample,12,3,Month 3,50,5,50.1,1,12
+PM6_D0,PM6_D0,PM6_D0.mzML,Post,madible cortical bone,sample,44,3,Month 3,0,6,50.4,1,44
+PM6_D10,PM6_D10,PM6_D10.mzML,Post,madible cortical bone,sample,50,3,Month 3,10,6,49.9,1,50
+PM6_D30,PM6_D30,PM6_D30.mzML,Post,madible cortical bone,sample,3,3,Month 3,30,6,49.8,1,3
+PM6_D50,PM6_D50,PM6_D50.mzML,Post,madible cortical bone,sample,36,3,Month 3,50,6,50.5,1,36
+PM7_D0,PM7_D0,PM7_D0.mzML,Post,madible cortical bone,sample,19,4,Month 4,0,7,50.1,1,19
+PM7_D10,PM7_D10,PM7_D10.mzML,Post,madible cortical bone,sample,5,4,Month 4,10,7,50.5,1,5
+PM7_D30,PM7_D30,PM7_D30.mzML,Post,madible cortical bone,sample,52,4,Month 4,30,7,50.4,1,52
+PM7_D50,PM7_D50,PM7_D50.mzML,Post,madible cortical bone,sample,8,4,Month 4,50,7,50.4,1,8
+PM8_D0,PM8_D0,PM8_D0.mzML,Post,madible cortical bone,sample,17,4,Month 4,0,8,50.5,1,17
+PM8_D10,PM8_D10,PM8_D10.mzML,Post,madible cortical bone,sample,31,4,Month 4,10,8,50.4,1,31
+PM8_D30,PM8_D30,PM8_D30.mzML,Post,madible cortical bone,sample,45,4,Month 4,30,8,49.8,1,45
+PM8_D50,PM8_D50,PM8_D50.mzML,Post,madible cortical bone,sample,23,4,Month 4,50,8,49.6,1,23
+PM9_D0,PM9_D0,PM9_D0.mzML,Post,madible cortical bone,sample,48,5,Month 5,0,9,50.4,1,48
+PM9_D10,PM9_D10,PM9_D10.mzML,Post,madible cortical bone,sample,14,5,Month 5,10,9,49.9,1,14
+PM9_D30,PM9_D30,PM9_D30.mzML,Post,madible cortical bone,sample,4,5,Month 5,30,9,49.5,1,4
+PM9_D50,PM9_D50,PM9_D50.mzML,Post,madible cortical bone,sample,10,5,Month 5,50,9,50.5,1,10
+QC2,QC2,QC2.mzML,QC,madible cortical bone,QC,11,,,,,,1,11
+QC3,QC3,QC3.mzML,QC,madible cortical bone,QC,20,,,,,,1,20
+QC4,QC4,QC4.mzML,QC,madible cortical bone,QC,29,,,,,,1,29
+QC5,QC5,QC5.mzML,QC,madible cortical bone,QC,38,,,,,,1,38
+QC6,QC6,QC6.mzML,QC,madible cortical bone,QC,47,,,,,,1,47
+QC7,QC7,QC7.mzML,QC,madible cortical bone,QC,56,,,,,,1,56
