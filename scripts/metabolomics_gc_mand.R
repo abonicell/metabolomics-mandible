@@ -172,6 +172,8 @@ gc_blk_perc_qc
 nc = ncol(gc_blk_perc) - ncol(gc_blk_perc_qc)
 cat(paste0('Number of features removed: ', nc))
 
+gc_blk_perc_qc$data %>% write.table("~/Documents/GitHub/metabolomics-mandible/data/data_gc_proc.txt", sep = "\t")
+gc_blk_perc_qc$variable_meta %>% write.table("~/Documents/GitHub/metabolomics-mandible/data/vameta_gc_proc.txt", sep = "\t")
 
 # perform drift correction  -----------------------------------------------
 M = # batch correction
