@@ -27,7 +27,7 @@ load("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/mandibl
 load("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/mandible_id.rda")
 load("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/golmdatabase.rda")
 
-plan(future::multisession, workers = 7)
+# plan(future::multisession, workers = 7)
 
 instrumental <- read.csv('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/inst.csv')
 phenotype <- read.csv('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/pheno.csv')
@@ -100,8 +100,6 @@ gc_DE$sample_meta$depth = factor(gc_DE$sample_meta$depth)
 gc_DE$sample_meta$run_order = as.numeric(gc_DE$sample_meta$run_order)
 gc_DE
 
-gc_DE$data %>% write.csv("~/Documents/GitHub/metabolomics-mandible/data/data_gc.csv")
-
 # matrix processing -------------------------------------------------------
 # blank filter
 blk_filter <- blank_filter(
@@ -114,7 +112,7 @@ blk_filter <- blank_filter(
 gc_blk <- model_apply(blk_filter, gc_DE)
 
 blank_plot = blank_filter_hist()
-chart_plot(blank_plot, gc_blk) + theme_bw(14)
+A <- chart_plot(blank_plot, gc_blk) + theme_bw(14)
 
 gc_blk <- predicted(gc_blk)
 gc_blk
@@ -132,7 +130,7 @@ perc_features <-
 gc_blk_perc <- model_apply(perc_features, gc_blk)
 
 mv_plot = mv_feature_filter_hist()
-chart_plot(mv_plot, gc_blk_perc) + theme_bw(14)
+B <- chart_plot(mv_plot, gc_blk_perc) + theme_bw(14)
 
 gc_blk_perc <- predicted(gc_blk_perc)
 gc_blk_perc
@@ -147,7 +145,7 @@ perc_sample <-
 gc_blk_perc_samp <- model_apply(perc_sample, gc_blk_perc)
 
 mv_plot_samp = mv_sample_filter_hist()
-chart_plot(mv_plot_samp, gc_blk_perc_samp) + theme_bw(14)
+C <- chart_plot(mv_plot_samp, gc_blk_perc_samp) + theme_bw(14)
 
 gc_blk_perc_samp <- predicted(gc_blk_perc_samp)
 gc_blk_perc_samp
@@ -164,7 +162,7 @@ qc_features <-
 gc_blk_perc_qc <- model_apply(qc_features , gc_blk_perc_samp)
 
 rsd_plot = rsd_filter_hist()
-chart_plot(rsd_plot, gc_blk_perc_qc) + theme_bw(14)
+D <- chart_plot(rsd_plot, gc_blk_perc_qc) + theme_bw(14)
 
 gc_blk_perc_qc <- predicted(gc_blk_perc_qc)
 gc_blk_perc_qc
@@ -172,8 +170,7 @@ gc_blk_perc_qc
 nc = ncol(gc_blk_perc) - ncol(gc_blk_perc_qc)
 cat(paste0('Number of features removed: ', nc))
 
-gc_blk_perc_qc$data %>% write.table("~/Documents/GitHub/metabolomics-mandible/data/data_gc_proc.txt", sep = "\t")
-gc_blk_perc_qc$variable_meta %>% write.table("~/Documents/GitHub/metabolomics-mandible/data/vameta_gc_proc.txt", sep = "\t")
+((A+B) / (C+D))
 
 # perform drift correction  -----------------------------------------------
 M = # batch correction
@@ -291,27 +288,27 @@ df_melted %>%
   group_by(variable) %>%
   kruskal_test(value ~ PMI) %>%
   add_significance() %>%
-  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_PMI.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_PMI_gcms.xlsx")
 
 df_melted %>%
   group_by(variable) %>%
   dunn_test(value ~ PMI,
             p.adjust.method = "fdr") %>%
   add_significance() %>%
-  write.xlsx("dunn_test_PMI.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/dunn_test_PMI_gcms.xlsx")
 
 df_melted %>%
   group_by(variable) %>%
   kruskal_test(value ~ Depth) %>%
   add_significance() %>%
-  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_Depth.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_Depth_gcms.xlsx")
 
 df_melted %>%
   group_by(variable) %>%
   dunn_test(value ~ Depth,
             p.adjust.method = "fdr") %>%
   add_significance() %>%
-  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/dunn_test_Depth.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/dunn_test_Depth_gcms.xlsx")
 
 # heatmap -----------------------------------------------------------------
 df <- gc_pr_filtered$data
@@ -336,7 +333,7 @@ heat_gc = pheatmap::pheatmap(
   angle_col =  "45"
 ) 
 
-ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/heat_gc.pdf', width = 12, height = 8, plot= heat_gc)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/heat_gcms.pdf', width = 12, height = 8, plot= heat_gc)
 
 # data split --------------------------------------------------------------
 df <- gc_pr_filtered$data
@@ -450,7 +447,7 @@ vip_bone_mandible_gcms_plsr_var_meta$Importance <- pls_vip$Importance
 
 # save VIP
 write.xlsx(vip_bone_mandible_gcms_plsr_var_meta,
-           "/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/vip_bone_mandible_gcms_plsr_var_meta.xlsx")
+           "/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/vip_bone_mandible_plsr_gcms.xlsx")
 
 # box plots ---------------------------------------------------------------
 df %>%
@@ -464,5 +461,5 @@ df %>%
   viridis::scale_fill_viridis(option = "A", discrete = TRUE, alpha = 0.4)+
   xlab('PMI (month)') + ylab('Normalised intensity') +theme(legend.position = 'none')
 
-ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/boxplot_gc.pdf', width = 7, height = 3)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/boxplot_gcms.pdf', width = 7, height = 3)
 

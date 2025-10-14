@@ -74,6 +74,10 @@ blk_filter <- blank_filter(
 
 lc_blk <- model_apply(blk_filter, lc_DE)
 
+blank_plot = blank_filter_hist()
+A <- chart_plot(blank_plot, lc_blk) + theme_bw(14)
+
+
 lc_blk <- predicted(lc_blk)
 lc_blk
 
@@ -88,6 +92,9 @@ perc_features <-
                     factor_name = 'Type')
 
 lc_blk_perc <- model_apply(perc_features, lc_blk)
+
+mv_plot = mv_feature_filter_hist()
+B <- chart_plot(mv_plot, lc_blk_perc) + theme_bw(14)
 
 lc_blk_perc <- predicted(lc_blk_perc)
 lc_blk_perc
@@ -104,11 +111,16 @@ qc_features <-
 
 lc_blk_perc_qc <- model_apply(qc_features , lc_blk_perc)
 
+rsd_plot = rsd_filter_hist()
+D <- chart_plot(rsd_plot, lc_blk_perc_qc) + theme_bw(14)
+
 lc_blk_perc_qc <- predicted(lc_blk_perc_qc)
 lc_blk_perc_qc
 
 nc = ncol(lc_blk_perc) - ncol(lc_blk_perc_qc)
 cat(paste0('Number of features removed: ', nc))
+
+((A+B) / (D+plot_spacer()))
 
 ## ---------------------------------------------------------------
 # prepare the model sequence
@@ -119,8 +131,6 @@ process <- knn_impute(neighbours = 5, sample_max = 100) +
 lc_pr <- model_apply(process, lc_blk_perc_qc)
 # get the transformed, scaled and imputed matrix
 lc_pr <- predicted(lc_pr)
-
-lc_pr$data %>% write_delim("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/data/process_matrix.txt")
 
 ## ---------------------------------------------------------------
 # PCA
@@ -178,27 +188,27 @@ df_melted %>%
   group_by(variable) %>%
   kruskal_test(value ~ PMI) %>%
   add_significance() %>%
-  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_PMI_lc.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_PMI_lcms.xlsx")
 
 df_melted %>%
   group_by(variable) %>%
   dunn_test(value ~ PMI,
             p.adjust.method = "fdr") %>%
   add_significance() %>%
-  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/dunn_test_PMI_lc.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/dunn_test_PMI_lcms.xlsx")
 
 df_melted %>%
   group_by(variable) %>%
   kruskal_test(value ~ Depth) %>%
   add_significance() %>%
-  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_Depth_lc.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/kruskal_test_Depth_lcms.xlsx")
 
 df_melted %>%
   group_by(variable) %>%
   dunn_test(value ~ Depth,
             p.adjust.method = "fdr") %>%
   add_significance() %>%
-  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/dunn_test_Depth_lc.xlsx")
+  write.xlsx("/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/dunn_test_Depth_lcms.xlsx")
 
 ## ---------------------------------------------------------------
 # heatmap
@@ -224,7 +234,7 @@ heat_lc <- pheatmap::pheatmap(
   angle_col =  "45"
 ) 
 
-ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/heat_lc.pdf', width = 22.5, height = 16, plot = heat_lc)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/heat_lcms.pdf', width = 22.5, height = 16, plot = heat_lc)
 
 ## ---------------------------------------------------------------
 # Machine learning - prepare data
@@ -328,7 +338,7 @@ var_meta[r,] -> vip_bone_mandible_lcms_plsr_var_meta
 vip_bone_mandible_lcms_plsr_var_meta$Importance <- pls_vip$Importance
 
 # save VIP
-write.xlsx(vip_bone_mandible_lcms_plsr_var_meta,"/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/vip_bone_mandible_lcms_plsr_var_meta.xlsx")
+write.xlsx(vip_bone_mandible_lcms_plsr_var_meta,"/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/tables/vip_bone_mandible_plsr_lcms.xlsx")
 
 
 # box plots ---------------------------------------------------------------
@@ -343,22 +353,22 @@ df %>%
   viridis::scale_fill_viridis(option = "D", discrete = TRUE, alpha = 0.4)+
   xlab('PMI (month)') + ylab('Normalised intensity') + theme(legend.position = 'none')
 
-ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/boxplot_lc.pdf', width = 7, height = 3)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/boxplot_lcms.pdf', width = 7, height = 3)
 
 # combine plots -----------------------------------------------------------
 (pca_gc | pca_lc) + 
   plot_annotation(tag_levels = 'A')
 
-ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/pca_tot.pdf', width = 10, height = 4)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/pca.pdf', width = 10, height = 4)
 
 (plsr_gc | plsr_lc) + 
   plot_annotation(tag_levels = 'A')
 
-ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/plsr_tot.pdf', width = 10, height = 4)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/plsr.pdf', width = 10, height = 4)
 
 (resid_gc | resid_lc) + 
   plot_annotation(tag_levels = 'A')
 
-ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/plsr_resid.pdf', width = 10, height = 4)
+ggsave('/Users/andreabonicelli/Documents/GitHub/metabolomics-mandible/figures/residuals.pdf', width = 10, height = 4)
 
 
